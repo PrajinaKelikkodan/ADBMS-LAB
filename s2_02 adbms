@@ -1,0 +1,66 @@
+
+ set autocommit=0;
+start transaction;
+begin;
+create database studentdetails;
+use studentdetails;
+
+create table students(Id int,Name_student varchar(20),Address varchar(30),Department varchar(50),Mathematics int,Physics int,Totalmark int);
+drop table students;
+insert into students values(001,"Anu","kozhikode","Civil engineering",150,150,300);
+insert into students values(002,"Manu","Calicut","Mca",155,170,325);
+insert into students values(003,"Gopika","kochi","Electrical Electronic Engineering",180,180,360);
+insert into students values(004,"Anu","Kottayam","Computer Science Engineering",170,170,340);
+insert into students values(005,"Ajil","Thamarasseri","Mca",175,175,350);
+insert into students values(006,"Sona","Alappuzha","Mtech",180,150,330,25);
+insert into students values(007,"Vismaya","Kollam","Biomedical",150,140,290);
+insert into students values(008,"Hilal","Malappuram","Mechanical Engineering",165,155,320);
+insert into students values(009,"Sneha","Malappuram","Mca",160,170,330);
+insert into students values(010,"Ladhi","Kochi","Mtech",155,155,310);
+select*from students;
+select Id,Name_student,Department from students;
+select id,Name_student from students where totalmark > 350;
+select distinct Department from students;
+select Name_student from students where department="Mechanical Engineering";
+select *from students where department="Mca" or department="Computer Science Engineering" ;
+select Name_student from students where department="Electrical Electronic Engineering";
+select Name_student,Department from students order by Department desc;
+update students set address=null where Name_student="Sneha";
+select * from students where Address is null;
+update students set Name_student="Robin zakariya" where department="Mca";
+delete from students where Name_student="VISMAYA";
+select max(Totalmark) from students;
+select min(Mathematics) from students;
+select Name_student from students where Name_student like 'a%';
+select Department from students where Department like '%g';
+select Name_student,department from students where department="Mca" or department="Electrical Electronic Engineering" or department="Mechanical engineering";
+select * from Details;
+select sum(Physics) from students ;
+select * from students;
+
+create view std as select Name_student,totalmark,department from students;
+select * from std;
+select sum(physics) as Total from students;
+alter table students drop column totalmark;
+alter table students add column total_mark int;
+update students set total_mark=(mathematics+physics);
+
+select * from students;
+create view student_det as select Name_student,department from students;
+select * from student_det;
+drop view student_det;
+alter table students add column age int;
+alter table students add constraint age check (age>=18);
+
+
+update students set age=12 where id=1;
+update students set age=22 where id=2;
+update students set age=25 where id=6;
+update students set age=18 where id=4;
+update students set age=15 where id=5;
+select Name_student,age from students where age>=18 ;
+ALTER TABLE students drop check age;
+delete from students where age="25";
+select * from students;
+commit;
+rollback;
